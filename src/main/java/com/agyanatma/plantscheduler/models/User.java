@@ -28,25 +28,21 @@ public class User implements UserDetails {
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "username", unique = true)
+    @Column(name = "username", nullable = false)
     private String username;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "fullname")
     private String fullname;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
     private Role role;
-
-    @CreatedDate
-    @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -69,8 +65,6 @@ public class User implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() {
-        return true;
-    }
+    public boolean isEnabled() { return true; }
 
 }

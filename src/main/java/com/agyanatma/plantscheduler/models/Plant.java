@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,15 +24,24 @@ public class Plant {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "soaking_time", nullable = false)
+    @Column(name = "soaking_time")
     private Integer soakingTime;
+
+    @Column(name = "start_harvest")
+    private Integer startHarvest;
+
+    @Column(name = "end_harvest")
+    private Integer endHarvest;
+
+    @Column(name = "shoots_appear")
+    private Integer shootsAppear;
 
     @ManyToMany
     @JoinTable(
-            name = "plant_to_plant_location",
+            name = "plant_locations",
             joinColumns = @JoinColumn(name = "plant_id"),
-            inverseJoinColumns = @JoinColumn(name = "plant_location_id")
+            inverseJoinColumns = @JoinColumn(name = "location_id")
     )
-    private Set<PlantLocation> plantLocation;
+    private Set<Location> location;
 
 }
